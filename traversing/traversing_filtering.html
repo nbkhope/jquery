@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery Traversing Filtering</title>
+<style>
+.specialp {
+	cursor: pointer;
+	
+	margin-top: 6px;
+	margin-bottom: 0px;
+}
+h1 {
+	margin: 0;
+	padding: 0;
+}
+div * {
+	margin: 0;
+	margin-bottom: 8px;
+	padding: 0;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function() {	
+	$("#firstpfirstdiv").click(function() {
+		$("div p").first().css({"color": "red"});
+	});
+	
+	$("#lastplastdiv").click(function() {
+		$("div p").last().css({"color": "green"});
+	});
+	
+	$("#pindex1").click(function() {
+		$("p").eq(1).css({"color": "blue"});
+	});
+	
+	$("#pindex9").click(function() {
+		$("p").eq(9).css({"color": "violet"});
+	});
+	
+	$("#pclassjack").click(function() {
+		$("p").filter(".jack").css({"color": "cyan"});
+	});
+	
+	$("#pclassnotjack").click(function() {
+		$("p").not(".jack").css({"color": "Chocolate"});
+	});
+	
+	$("#lastspan").click(function() {
+		$("span").last().css({"color": "GoldenRod"});
+	});	
+});
+</script>
+</head>
+<body>
+
+<h1>jQuery Traversing Filtering</h1>
+(the selector texts below are paragraphs)
+<p id="firstpfirstdiv" class="specialp" style="color:red;">Mark the first p of the first div</p>
+<p id="lastplastdiv" class="specialp" style="color:green;">Mark the last p of the last div</p>
+<p id="pindex1" class="specialp" style="color:blue;">Mark the p with index 1</p>
+<p id="pindex9" class="specialp" style="color:violet;">Mark the p with index 9</p>
+<p id="pclassjack" class="specialp" style="color:cyan;">Mark all p with class "jack"</p>
+<p id="pclassnotjack" class="specialp" style="color:Chocolate;">Mark all p that are not of class "jack"</p>
+<p id="lastspan" class="specialp" style="color:GoldenRod;">Mark the last span element</p>
+
+<br>
+
+<h1>First div</h1>
+<div>
+	<p>First paragraph</p>
+	<p>Second paragraph</p>
+	<p class="jack">Third paragraph</p>
+	<p>Last paragraph</p>
+	<span>A span</span>
+	<span>Another span</span>
+	<h4>An h4 heading</h4>
+	<p>A paragraph</p>
+</div>
+
+<h1>Second div</h1>
+<div>
+	<p>First paragraph</p>
+	<p class="jack">Second paragraph</p>
+	<p>Last paragraph</p>
+	<span>A span</span>
+	<h4>An h4 heading</h4>
+	<p class="jack">A paragraph</p>
+</div>
+
+<h1>Third div</h1>
+<div>
+	<p class="jack">First paragraph</p>
+	<p>Another paragraph</p>
+	<span>A span</span>
+	<h4>An h4 heading</h4>
+	<p class="jack">A paragraph</p>
+</div>
+
+</body>
+</html>

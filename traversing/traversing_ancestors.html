@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery Traversing Ancestors</title>
+<style>
+.ancestors * {
+	display: block;
+	border: 2px solid lightgrey;
+	color: lightgrey;
+	padding: 5px;
+	margin: 15px;
+}
+.specialp {
+	cursor: pointer;
+}
+h1 {
+	margin-top: 0;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("#directparent").click(function() {
+		$("span").parent().css("color", "red");
+	});
+
+	$("#allparents").click(function() {
+		// note: this will also affect the body, whose "color" will be changed
+		$("span").parents().css("color", "green");
+	});
+
+	$("#markbetween").click(function() {
+		$("span").parentsUntil("div").css("color", "blue");
+	});
+
+	$("#markgrandpa").click(function() {
+		$("span").parent().parent().css("color", "violet");
+	});
+
+	$("#markulancestors").click(function() {
+		$("span").parents("ul").css("color", "cyan");
+	});
+
+	$("#markuntildiv").click(function() {
+		$("span").parentsUntil("div").css("color", "magenta");
+	});
+});
+</script>
+</head>
+<body>
+
+<h1>jQuery Traversing Ancestors</h1>
+
+<p id="directparent" class="specialp" style="color:red;">Mark direct parent of span</p>
+<p id="allparents" class="specialp" style="color:green;">Mark all ancestors of span</p>
+<p id="markbetween" class="specialp" style="color:blue;">Mark all parents between span and div</p>
+<p id="markgrandpa" class="specialp" style="color:violet">Mark grandparent of span</p>
+<p id="markulancestors" class="specialp" style="color:cyan">Mark all ancestors of span that are ul</p>
+<p id="markuntildiv" class="specialp" style="color:magenta">Mark all ancestors of span until div</p>
+
+<div class="ancestors">
+	<div style="width:500px;">div (great-grandparent)
+		<ul>ul (grandparent)
+			<li>li (direct parent)
+				<span>span</span>
+			</li>
+		</ul>
+	</div>
+
+	<div style="width:500px;">div (grandparent)
+		<p>p (direct parent)
+			<span>span</span>
+		</p>
+	</div>
+</div>
+
+<p style="width:500px;border:2px solid lightgray;padding:5px;margin:0px">A paragraph child of body</p>
+
+</body>
+</html>

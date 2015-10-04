@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery Traversing Siblings</title>
+<style>
+.siblings * {
+	display: block;
+	border: 2px solid lightgrey;
+	color: lightgrey;
+	padding: 5px;
+	margin: 15px;
+}
+.specialp {
+	cursor: pointer;
+	
+	margin-top: 6px;
+	margin-bottom: 0px;
+}
+h1 {
+	margin: 0;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("#siblingsh2").click(function() {
+		$("h2").siblings().css({"color": "red"});
+	});
+	
+	$("#siblingsh2p").click(function() {
+		$("h2").siblings("p").css({"color": "green"});
+	});
+	
+	$("#nextsiblingh2").click(function() {
+		$("h2").next().css({"color": "blue"});
+	});	
+
+	$("#allnextsiblingsh2").click(function() {
+		$("h2").nextAll().css({"color": "violet"});
+	});	
+
+	$("#nextofh2untilh6").click(function() {
+		$("h2").nextUntil("h6").css({"color": "cyan"});
+	});	
+	
+	$("#prevsiblingh2").click(function() {
+		$("h2").prev().css({"color": "Chocolate"});
+	});	
+
+	$("#allprevsiblingsh2").click(function() {
+		$("h2").prevAll().css({"color": "DarkBlue"});
+	});	
+
+	$("#prevofh2untilh4").click(function() {
+		$("h2").prevUntil("h4").css({"color": "GoldenRod"});
+	});		
+});
+</script>
+</head>
+<body>
+
+<h1>jQuery Traversing Siblings</h1>
+
+<p id="siblingsh2" class="specialp" style="color:red;">Mark all siblings of h2</p>
+<p id="siblingsh2p" class="specialp" style="color:green;">Mark all siblings of h2 that are p</p>
+<p id="nextsiblingh2" class="specialp" style="color:blue;">Mark the next sibling of h2</p>
+<p id="allnextsiblingsh2" class="specialp" style="color:violet;">Mark all the next siblings of h2</p>
+<p id="nextofh2untilh6" class="specialp" style="color:cyan;">Mark all the next siblings of h2 UNTIL h6</p>
+<p id="prevsiblingh2" class="specialp" style="color:Chocolate;">Mark the prev sibling of h2</p>
+<p id="allprevsiblingsh2" class="specialp" style="color:DarkBlue;">Mark all the prev siblings of h2</p>
+<p id="prevofh2untilh4" class="specialp" style="color:GoldenRod;">Mark all the prev siblings of h2 UNTIL h4</p>
+
+<br>
+
+<div class="siblings">(div class container)
+	<div>div (parent)
+		<h3>h3</h3>
+		<h4>h4</h4>
+		<p>p</p>
+		<span>span</span>
+		<h2>h2</h2>
+		<h3>h3</h3>
+		<p>p</p>
+		<h4>h4</h4>
+		<span>span</span>
+		<h5>h5</h5>
+		<h6>h6</h6>
+		<p>p</p>
+		<span>span</span>
+	</div>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery Traversing Descendants</title>
+<style>
+.ancestors * {
+	display: block;
+	border: 2px solid lightgrey;
+	color: lightgrey;
+	padding: 5px;
+	margin: 15px;
+}
+.specialp {
+	cursor: pointer;
+		
+	margin: 8px 0 8px;
+}
+h1 {
+	margin-top: 0;
+	margin-bottom: 0;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("#directchildren").click(function() {
+		$("div").children().css("color", "red");
+	});
+
+	$("#firstchild").click(function() {
+		$("div").children(":first").css("color", "green");
+	});
+
+	$("#directchildrennotancestorsclass").click(function() {
+		$("div").not(".ancestors").children().css("color", "blue");
+	});
+
+	$("#firstchildnotancestorsclass").click(function() {
+		$("div").not(".ancestors").children(":first").css("color", "violet");
+	});
+
+	$("#alldescendants").click(function() {
+		$("div").not(".ancestors").find("*").css("color", "cyan");
+	});
+
+	$("#spandescendants").click(function() {
+		$("div").not(".ancestors").find("span").css("color", "magenta");
+	});
+});
+</script>
+</head>
+<body>
+
+<h1>jQuery Traversing Descendants</h1>
+
+<p id="directchildren" class="specialp" style="color:red;">Mark all (direct) children of a div</p>
+<p id="firstchild" class="specialp" style="color:green;">Mark first child of a div</p>
+
+<p id="directchildrennotancestorsclass" class="specialp" style="color:blue;">Mark all (direct) children a div that is not of ancestors class</p>
+<p id="firstchildnotancestorsclass" class="specialp" style="color:violet;">Mark first child of a div that is not of ancestors class</p>
+
+<p id="alldescendants" class="specialp" style="color:cyan;">Mark all the descendants of a div not of ancestors class</p>
+<p id="spandescendants" class="specialp" style="color:magenta">Mark all the descendants of a div (not of ancestors class) that are a span</p>
+
+<br>
+
+<div class="ancestors">div (ancestors class)
+	<div style="width:500px;">div (great-grandparent)
+		<ul>ul (grandparent)
+			<li>li (direct parent)
+				<span>span</span>
+			</li>
+		</ul>
+	</div>
+
+	<div style="width:500px;">div (grandparent)
+		<p>p (direct parent)
+			<span>span</span>
+		</p>
+	</div>
+
+	<div style="width:500px;">div
+		<p>p (first child)</p>
+		<p>p (second child)</p>
+		<span>span (third child)</span>
+		<p>p (last child)</p>	
+	</div>
+</div>
+
+<p style="width:500px;border:2px solid lightgray;padding:5px;margin:0px">A paragraph child of body</p>
+
+</body>
+</html>
