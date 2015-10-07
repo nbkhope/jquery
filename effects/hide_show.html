@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery Effects Hide Show</title>
+<style>
+h1 {
+	margin: 0;
+	padding: 0;
+}
+button {
+	margin: 3px;
+	padding: 2px;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function() {	
+	
+	// Hide p if it is clicked
+	$("p").click(function() {
+		$(this).hide();
+	});
+	
+	$("#hidep").click(function() {
+		$("p").hide();
+	});
+	
+	$("#showp").click(function() {
+		$("p").show();
+	});
+	
+	$("#togglep").click(function() {
+		$("p").toggle();
+	});
+	
+	$("#hidepslow").click(function() {
+		$("p").hide("slow");
+	});
+	
+	$("#showpmilli").click(function() {
+		$("p").show(3000);
+	});
+	
+	$("#togglepcallback").click(function() {
+		$("p").toggle("fast", function() {
+			// Use ! because toggle will make display:none before callback function
+			// Don't be confused by the "visible" denomination
+			if (!$(this).is(":visible")) {
+				$("div").css("background-color", "yellow");
+			}
+			else {
+				$("div").css("background-color", "red");
+			}
+		});
+	});
+});
+</script>
+</head>
+<body>
+
+<h1>jQuery Effects Hide Show</h1>
+
+<button id="hidep">Hide p</button>
+<button id="showp">Show p</button>
+<button id="togglep">Toggle p</button><br>
+
+<button id="hidepslow">Hide p slowly</button>
+<button id="showpmilli">Show p (3000ms delay)</button><br>
+<button id="togglepcallback">Toggle p fast and use callback function to change div attributes</button><br>
+
+(You can also click on the p to hide it)
+
+<p>I am a paragraph.</p>
+
+<p>I am another paragraph.</p>
+
+<p>I am yet another paragraph.</p>
+
+<div style="width:100px;height:100px;background-color:red;text-align:center;">This is a div</div>
+
+</body>
+</html>

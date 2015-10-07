@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery Effects Animation</title>
+<style>
+h1 {
+	margin: 0;
+	padding: 0;
+}
+button {
+	margin: 3px;
+	padding: 3px;
+	background-color: AntiqueWhite;
+	border-radius: 6px;
+	font-size: large;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function() {	
+	$("#movediv1").click(function() {
+		$("#div1").animate({left: '256px'});
+	});
+	
+	$("#movediv2").click(function() {
+		/* You can change multiple attributes */
+		$("#div2").animate({
+			left: '256px',
+			opacity: '0.5',
+			width: '152px',
+			height: '152px'
+		});
+	});
+	
+	$("#movediv3").click(function() {
+		/* You can use relative values */
+		$("#div3").animate({
+			left: '256px',
+			width: '+=60px',
+			height: '+=60px'
+		});
+		/* To add an extra 60px of width and height */
+	});
+	
+	$("#togglehdiv1").click(function() {
+		/* You can show, hide, or toggle a property */
+		$("#div1").animate({height: 'toggle'});
+	});
+	
+	$("#animatequeue").click(function() {
+		var div = $("#div1");
+		
+		// Reset shape attributes
+		// Don't forget the quotes around the attribute name and value
+		div.css({
+			"background": "#98bf21", 
+			"height": "100px",
+			"width": "100px",
+			"position": "relative",
+			"display": "block",
+			"left": "0",
+			"opacity": "1"
+		});
+		div.text("");
+		
+		div.animate({height: '50px', opacity: '0.5'}, "slow");
+		div.animate({width: '200px', opacity: '0.75'}, "slow");
+		div.animate({width: '100px', left: '150px'}, "slow");
+		div.animate({height: '+=100px', opacity: '0.25'}, "slow");
+		div.animate({left: '0', opacity: '0.5'}, "slow");
+		div.animate({
+			width: '100px', 
+			height: '100px', 
+			opacity: '1'}, 
+			1700, 
+			function() { // callback function 
+				div.text("Yeah!"); // you need to have function() { } enclosing this
+				
+				// note for animate(), you can't have a hyphen -. Use camelCase
+				div.animate({fontSize: '2em'}, "slow")
+			} 
+		);
+		
+		// If you place this here, then it will already have text even before
+		// the animation takes place because the animate() calls above just
+		// place animations into a queue and keeps going through the other code
+		//
+		// Solution: use a callback after the last animate() call
+		//	that way, the function will only be called after the animation is over
+		//
+		// div.text("Yeah!");
+	});
+	
+	// FOR ONE SINGLE animate() call:
+	// if the animation was stopped and this button is pressed,
+	// the animation will continue from where it stopped 
+	// (it won't restart from scratch) if stop() was called with no params
+	//
+	// if the stop() was called with params to stopAll, then
+	// the whole queue would be cleared and you wouldn't be able
+	// to continue from where it left off.
+	//
+	$("#animatediv4").click(function() {
+		$("#div4").animate({width: '+=250px', opacity: '0.4'}, 5000);
+	});
+	
+	
+	$("#stopdiv4animation").click(function() {
+		
+		// Function usage
+		// $(selector).stop(stopAll,goToEnd);
+		
+		$("#div4").stop();
+	});
+	
+	$("#stopdiv1").click(function() {
+		$("#div1").stop(); // will stop only one animation (not all)
+	});
+	
+	$("#stopdiv1all").click(function() {
+		$("#div1").stop(true); // will stop all animations on #div1
+	});
+	
+	$("#stopdiv1allend").click(function() {
+		$("#div1").stop(true, true); 
+	});
+	
+	$("#stopdiv1end").click(function() {
+		$("#div1").stop(false, true);  // stop one anim and finish it
+	});
+});
+</script>
+</head>
+<body>
+
+<h1>jQuery Effects Animation</h1>
+
+<button id="movediv1">Move div1 to the right</button><br>
+<button id="movediv2">Move div2 to the right and change other attributes</button><br>
+<button id="movediv3">Move div3 to the right and change other attributes using Relative Values (try clicking more than once)</button><br>
+<button id="togglehdiv1">Toggle div1's height</button><br>
+<button id="animatequeue">Animation followed by Animation on div1<br>(Queue Functionality)</button>
+<button id="stopdiv1">div1<br>Stop</button>
+<button id="stopdiv1all">div1<br>stopAll</button>
+<button id="stopdiv1allend">div1<br>stopAll & goToEnd</button>
+<button id="stopdiv1end">div1<br>stop & goToEnd</button><br>
+<button id="animatediv4">Animate the fourth div (red)</button>
+<button id="stopdiv4animation">Stop the fourth div animation</button><br>
+
+
+<br>
+
+<div id="div1" style="background:#98bf21;height:100px;width:100px;position:relative;"></div><br>
+<div id="div2" style="background:GoldenRod;height:100px;width:100px;position:relative;"></div><br>
+<div id="div3" style="background:blue;height:100px;width:100px;position:relative;"></div><br>
+<div id="div4" style="background:red;height:100px;width:100px;position:relative;"></div><br>
+
+<!-- Note: with absolute positioning, an element can be placed anywhere on a page -->
+<!-- with relative positioning, the element is positioned relative to its normal position -->
+
+</body>
+</html>

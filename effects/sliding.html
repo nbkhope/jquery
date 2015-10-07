@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery Effects Sliding</title>
+<style>
+h1 {
+	margin: 0;
+	padding: 0;
+}
+.panel, .flip {
+	width: 512px;
+	box-sizing: border-box;
+	
+	padding: 5px;
+	text-align: center;
+	background-color: #E5EECC;
+	border: solid 1px #C3C3C3;
+}
+.panel {
+	padding: 50px;
+	
+	/* The panel is initially hidden */
+	display: none;
+}
+.flip {
+	/* Change cursor when hovering over flip */
+	cursor: pointer;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function() {	
+	$("#flipslidedown").click(function() {
+		$("#panelslidedown").slideDown();
+	});
+	
+	$("#flipslideup").click(function() {
+		$("#panelslideup").slideUp("slow");
+	});
+	
+	$("#flipslidetoggle").click(function() {
+		$("#panelslidetoggle").slideToggle(2500);
+	});
+});
+</script>
+</head>
+<body>
+
+<h1>jQuery Effects Sliding</h1>
+
+<div id="flipslidedown" class="flip">Click to slide down panel</div>
+<div id="panelslidedown" class="panel">Hey, what's up? :)</div>
+
+<br><br>
+
+<div id="flipslideup" class="flip">Click to slide up panel slowly</div>
+<div id="panelslideup" class="panel" style="display:block">Hey, what's up? :)</div>
+
+<br><br>
+
+<div id="flipslidetoggle" class="flip">Click to slide toggle panel (2500ms)</div>
+<div id="panelslidetoggle" class="panel">Hey, what's up? :) Keep on togglin'!!</div>
+
+</body>
+</html>
