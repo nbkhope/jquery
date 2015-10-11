@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>jQuery AJAX</title>
+<style>
+body * {
+	font-family: Georgia, Verdana, Times, serif;
+	//border: 1px dashed black;
+}
+.content, .content-info {
+	font-size: large;
+	margin-top: 5px;
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid black;
+}
+.content-info {
+	background-color: OldLace;
+	display: none;
+}
+h1, h2, h3, h4, h5, h6 {
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+h2 {
+	color: DarkBlue;
+	border-bottom: 1px solid black;
+}
+button {
+	background-color: Cornsilk;
+	margin-bottom: 5px;
+	padding: 5px;
+	border-radius: 4px;
+}
+code {
+	color: black;
+	background-color: Gainsboro;
+	font-family: monospace;
+	margin-left: 36px;
+	padding: 5px;
+	display: inline-block;
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+
+	// Syntax:
+	// $(selector).load(URL, data, callback); 
+	
+	$("#firstexample").click(function() {
+		// Loads content from the file some_data.txt into the div using AJAX
+		$("#content1").load("some_data.txt");
+	});
+	
+	$("#firstexampleselector").click(function() {
+		// Loads content from the file, but only from the element with given id
+		$("#content2").load("some_data.txt #myparagraph");
+	});
+	
+	$("#firstexamplecallback").click(function() {
+		
+		/*	
+		responseTxt - contains the resulting content if the call succeeds
+		statusTxt - contains the status of the call
+		xhr - contains the XMLHttpRequest object
+		*/
+		
+		// In addition to loading content, also calls back a function
+		$("#content1").load("some_data.txt", function(responseTxt, statusTxt, xhr) {
+			var message = "";
+			
+			if (statusTxt == "success") {
+				message = "Data load successful";
+				
+				$("#message-paragraph").css("color", "green");
+			}
+			else if (statusTxt == "error") {
+				message = "Error loading data";
+				
+				$("#message-paragraph").css("color", "red");
+			}
+			$("#message-paragraph").text(message);
+			
+			$("#response-text").text(responseTxt);
+			
+			$("#content1callback").show();
+		});
+	});
+	
+});
+</script>
+</head>
+<body>
+	
+<!-- AJAX: Asynchronous JavaScript and XML. -->
+
+<h1>Learning jQuery: AJAX</h1>
+
+<h2>First example</h2>
+<button id="firstexample">Click me to get External Content ;)</button>
+
+<div id="content1" class="content">
+	There is some content here.
+	<p>This is some content</p>
+	<span>:)</span>
+</div>
+
+<h2>First example Using Selector (#myparagraph)</h2>
+<button id="firstexampleselector">Click me to get External Content ;)</button>
+
+<div id="content2" class="content">
+	There is some content here.
+	<p>This is some content</p>
+	<span>:)</span>
+</div>
+
+<h2>First example with Callback function</h2>
+
+<button id="firstexamplecallback">Click me to get External Content ;)</button>	
+<div id="content1callback" class="content-info">
+	<p id="message-paragraph"></p>
+	<p id="response-text">responseTxt:<br></p>
+</div>
+
+</body>	
+</html>

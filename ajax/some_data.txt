@@ -1,0 +1,6 @@
+<h3>This is stuff from another file (some_data.txt)</h3>
+<p id="myparagraph">This is a paragraph from another file</p>
+<p>You can do this using<br>
+	<code>$("#content").load("some_data.txt");</code><br>
+</p>
+
