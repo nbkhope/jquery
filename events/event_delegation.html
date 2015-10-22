@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Event Delegation</title>
+<style>
+.container {
+	background-color: AntiqueWhite;
+	margin-bottom: 24px;
+	border: 1px solid black;
+}
+.container-title {
+	background-color: AliceBlue;
+	font-weight: bold;
+	border-bottom: 1px solid black;
+	display: block;
+
+}
+</style>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script>
+$(document).ready(function() {
+	$("#list-1 a").on("click", function(event) {
+		// So it doesn't go to the link
+		event.preventDefault();
+		console.log($(this).text());
+	});
+	
+	// Append item to the list
+	$("#list-1").append("<li><a href='../ajax/'>jQuery Ajax (local)</a></li>");
+	
+	// The new item above will not behave as expected.
+	// The previous statement made a directly bound event handler,
+	// so whatever is later added to the list will not be heard
+	
+	// Event Bubbling / Event Propagation:
+	// anytime you click one of our bound anchor tags, you are 
+	// effectively clicking the entire document body
+	
+	// ============================================================ //
+	
+	// Attach a delegated event handler
+	$("#list-2").on("click", "a", function(event) {
+		event.preventDefault();
+		console.log($(this).text());
+	});
+	
+	// Append item to the list
+	$("#list-2").append("<li><a href='../ajax/'>jQuery Ajax (local)</a></li>");
+	
+	// Now clicking the new item to log the event works :D
+	
+	// ============================================================ //
+	
+	// Attach a delegated event handler
+	$("#list-3").on("click", "a", function(event) {
+		var elem = $(this);
+		
+		// If there is http in the link, make it open in new window
+		if (elem.is("[href^='http']")) {
+			elem.attr("target", "_blank");
+		}
+	});
+	
+	// The above can also be implemented using
+	/*
+	$("#list-3").on("click", "a[href^='http']", function(event) {
+			$(this).attr("target", "_blank");
+	});
+	*/
+	
+	// Append item to the list
+	$("#list-3").append("<li><a href='../ajax/'>jQuery Ajax (local)</a></li>");
+		
+});
+</script>
+</head>
+<body>
+
+<h1>Event Delegation (jQuery)</h1>
+
+<div id="container-1" class="container"><span class="container-title">Container 1</span>
+	<ul id="list-1">
+	<li><a href="http://www.google.com/">Google</a></li>
+	<li><a href="http://www.yahoo.com/">Yahoo</a></li>
+	<li><a href="../images/">Images (local)</a></li>
+	<li><a href="http://www.bing.com/">Bing</a></li>
+	<li><a href="sample.txt">Sample File (local)</a></li>
+	<li><a href="http://nbkworld.byethost4.com/">NBK World</a></li>
+	</ul>
+</div>
+
+<div id="container-2" class="container"><span class="container-title">Container 2</span>
+	<ul id="list-2">
+	<li><a href="http://www.google.com/">Google</a></li>
+	<li><a href="http://www.yahoo.com/">Yahoo</a></li>
+	<li><a href="../images/">Images (local)</a></li>
+	<li><a href="http://www.bing.com/">Bing</a></li>
+	<li><a href="sample.txt">Sample File (local)</a></li>
+	<li><a href="http://nbkworld.byethost4.com/">NBK World</a></li>
+	</ul>
+</div>
+
+<div id="container-3" class="container"><span class="container-title">Container 3</span>
+	<ul id="list-3">
+	<li><a href="http://www.google.com/">Google</a></li>
+	<li><a href="http://www.yahoo.com/">Yahoo</a></li>
+	<li><a href="../images/">Images (local)</a></li>
+	<li><a href="http://www.bing.com/">Bing</a></li>
+	<li><a href="sample.txt">Sample File (local)</a></li>
+	<li><a href="http://nbkworld.byethost4.com/">NBK World</a></li>
+	</ul>
+</div>
+
+</body>
+</html>
